@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "An investigator's return to the coordinator (Assignment 6, Part B, task 2)",
+  "description": "result, status, not_searched and could_not_determine come from the worker's return tool; searched and calls_used are filled by the coordinator's code from the worker's own tool calls, never from the model's words.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["result", "status", "searched", "not_searched", "calls_used", "could_not_determine"],
+  "properties": {
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["issue", "label", "file", "evidence", "pr_summary"],
+      "properties": {
+        "issue": {"type": "integer"},
+        "label": {"type": "string", "enum": ["bug", "feature", "question", "docs"]},
+        "file": {"type": "string"},
+        "evidence": {"type": "string"},
+        "pr_summary": {"type": "string"}
+      }
+    },
+    "status": {"type": "string", "enum": ["found", "candidate", "out_of_budget"]},
+    "searched": {"type": "array", "items": {"type": "string"}},
+    "not_searched": {"type": "array", "items": {"type": "string"}},
+    "calls_used": {"type": "integer"},
+    "could_not_determine": {"type": "array", "items": {"type": "string"}}
+  }
+}
